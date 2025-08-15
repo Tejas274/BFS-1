@@ -31,3 +31,32 @@ class Solution:
                     q.put(item.right)
 
         return result
+
+
+#Time Complexity : o(n)
+#Space Complexity : o(h)
+from queue import Queue
+class Solution:
+    def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
+
+        if root == None:
+           return []
+        self.result = []
+
+        self.helper(root, 0)
+
+        return self.result
+
+
+    def helper(self, root: Optional[TreeNode], counter: int) -> None:
+
+        if root == None:
+           return
+
+        if len(self.result) ==  counter:
+           self.result.append(root.val)
+        else:
+           self.result[counter] = root.val
+
+        self.helper(root.left, counter + 1)
+        self.helper(root.right, counter + 1)
